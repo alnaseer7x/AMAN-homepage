@@ -12,8 +12,8 @@ const queryClient = new QueryClient();
 
 const faqItems = [
   {
-    question: 'هل وثاق جهة قانونية أو وسيط بين الطرفين؟',
-    answer: 'وثاق أداة تساعد الطرفين على توثيق ما اتفقا عليه بوضوح قبل بدء العمل. لا نحل محل الاستشارة القانونية، ولا نتدخل في تنفيذ المشروع أو تحويل المبالغ.',
+    question: 'هل أمان جهة قانونية أو وسيط بين الطرفين؟',
+    answer: 'أمان أداة تساعد الطرفين على توثيق ما اتفقا عليه بوضوح قبل بدء العمل. لا نحل محل الاستشارة القانونية، ولا نتدخل في تنفيذ المشروع أو تحويل المبالغ.',
   },
   {
     question: 'هل يجب أن يكون المشروع كبيراً؟',
@@ -27,9 +27,9 @@ const faqItems = [
 
 function BrandMark({ light = false }: { light?: boolean }) {
   return (
-    <a href="#top" className={`brand-lockup ${light ? 'brand-light' : ''}`} aria-label="وثاق، الصفحة الرئيسية" data-testid="link-home">
-      <span className="brand-emblem" aria-hidden="true"><span>و</span></span>
-      <span className="brand-word">وِثاق</span>
+    <a href="#top" className={`brand-lockup ${light ? 'brand-light' : ''}`} aria-label="أمان، الصفحة الرئيسية" data-testid="link-home">
+      <span className="brand-emblem" aria-hidden="true"><span>أ</span></span>
+      <span className="brand-word">أمان</span>
     </a>
   );
 }
@@ -43,7 +43,7 @@ function HeroDocument() {
       <div className="agreement-card drift">
         <div className="doc-topline">
           <span className="doc-mark"><FileText size={15} strokeWidth={1.7} /> اتفاق مشروع</span>
-          <span className="doc-id">و ث / ٠٢٤</span>
+          <span className="doc-id">أ م / ٠٢٤</span>
         </div>
         <div className="doc-rule" />
         <p className="doc-caption">اتفاق تقديم خدمات</p>
@@ -77,7 +77,7 @@ function HeroDocument() {
       </div>
       <div className="floating-note note-one"><span className="note-check"><Check size={12} /></span><span><b>مراحل واضحة</b><small>قبل أن يبدأ العمل</small></span></div>
       <div className="floating-note note-two"><span className="note-icon"><FileCheck2 size={16} /></span><span><b>اتفاق موثّق</b><small>بين الطرفين</small></span></div>
-      <div className="round-seal" aria-hidden="true"><span className="seal-orbit"><i>و</i></span><small>وضوح<br />من البداية</small></div>
+      <div className="round-seal" aria-hidden="true"><span className="seal-orbit"><i>أ</i></span><small>وضوح<br />من البداية</small></div>
     </div>
   );
 }
@@ -93,10 +93,10 @@ function Home() {
         <div className="header-inner section-shell">
           <BrandMark />
           <nav className={`main-nav ${menuOpen ? 'nav-open' : ''}`} aria-label="التنقل الرئيسي">
-            <a href="#why" onClick={closeMenu}>لماذا وثاق؟</a>
+            <a href="#why" onClick={closeMenu}>لماذا أمان؟</a>
             <a href="#how" onClick={closeMenu}>كيف يعمل</a>
             <a href="#faq" onClick={closeMenu}>أسئلة شائعة</a>
-            <a href="#about" onClick={closeMenu}>عن وثاق</a>
+            <a href="#about" onClick={closeMenu}>عن أمان</a>
           </nav>
           <a className="header-cta" href="#how" data-testid="link-get-started">ابدأ بوضوح <ArrowLeft size={16} /></a>
           <button className="mobile-menu-button" aria-label={menuOpen ? 'إغلاق القائمة' : 'فتح القائمة'} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)} data-testid="button-mobile-menu">
@@ -110,10 +110,10 @@ function Home() {
           <div className="hero-copy">
             <div className="hero-kicker reveal"><span className="kicker-line" /> اتفاق أوضح. بداية أهدأ.</div>
             <h1 className="hero-title reveal reveal-delay-1">الشغل الحلو<br />يبدأ <em>باتفاق واضح.</em></h1>
-            <p className="hero-description reveal reveal-delay-2">وثاق يساعدك أنت والطرف الآخر على ترتيب تفاصيل المشروع ومراحله، من البداية — عشان كل واحد يعرف حقه، وخطوته الجاية.</p>
+            <p className="hero-description reveal reveal-delay-2">أمان يساعدك أنت والطرف الآخر على ترتيب تفاصيل المشروع ومراحله، من البداية — عشان كل واحد يعرف حقه، وخطوته الجاية.</p>
             <div className="hero-actions reveal reveal-delay-3">
               <a className="button-primary" href="#how" data-testid="button-hero-start">خلّ اتفاقك أوضح <ArrowLeft size={17} /></a>
-              <a className="text-link" href="#why" data-testid="link-explore">تعرّف على وثاق <ArrowDownLeft size={16} /></a>
+              <a className="text-link" href="#why" data-testid="link-explore">تعرّف على أمان <ArrowDownLeft size={16} /></a>
             </div>
             <div className="hero-note reveal reveal-delay-3"><span className="note-dots"><i /><i /><i /></span><span>للمستقلين وأصحاب المشاريع في كل بداية جديدة</span></div>
           </div>
@@ -126,7 +126,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="trust-strip" aria-label="مبادئ وثاق">
+      <section className="trust-strip" aria-label="مبادئ أمان">
         <div className="trust-inner section-shell">
           <p>لأن الشراكة الطيبة تبدأ من تفاهم</p>
           <div className="trust-items">
@@ -141,7 +141,7 @@ function Home() {
         <div className="why-intro">
           <span className="eyebrow">قبل أول تسليم</span>
           <h2 className="section-heading">لا تترك التفاصيل<br /><em>للتخمين.</em></h2>
-          <p>كثير من الخلافات ما تبدأ بخلاف؛ تبدأ بتفصيل صغير ما اتفقنا عليه. وثاق يحوّل الكلام المتفرق إلى صورة واحدة يفهمها الجميع.</p>
+          <p>كثير من الخلافات ما تبدأ بخلاف؛ تبدأ بتفصيل صغير ما اتفقنا عليه. أمان يحوّل الكلام المتفرق إلى صورة واحدة يفهمها الجميع.</p>
           <a className="underlined-link" href="#how">خلّ البداية على بيّنة <ArrowLeft size={15} /></a>
         </div>
         <div className="clarity-list">
@@ -167,8 +167,8 @@ function Home() {
         <div className="quote-inner section-shell">
           <span className="quote-mark">«</span>
           <p>الاتفاق الواضح ما يقيّد الشغل؛<br /><em>يعطيه مساحة يمشي بثقة.</em></p>
-          <span className="quote-caption">فكرة وثاق، من أول صفحة</span>
-          <div className="quote-decoration" aria-hidden="true"><span>و</span></div>
+          <span className="quote-caption">فكرة أمان، من أول صفحة</span>
+          <div className="quote-decoration" aria-hidden="true"><span>أ</span></div>
         </div>
       </section>
 
@@ -244,8 +244,8 @@ function Home() {
           <span className="closing-kicker">خلّ البداية تشبه اللي تتمنّاه</span>
           <h2>اتفاق واضح.<br /><em>وقلب مرتاح.</em></h2>
           <p>ابدأوا مشروعكم على تفاهم يحترم وقتكم وجهدكم، ويترك مساحة للشغل الحلو.</p>
-          <a className="closing-button" href="#top" data-testid="button-back-to-top">اكتشف وثاق من البداية <ArrowLeft size={17} /></a>
-          <span className="closing-note">وثاق — وضوح يحفظ الودّ</span>
+          <a className="closing-button" href="#top" data-testid="button-back-to-top">اكتشف أمان من البداية <ArrowLeft size={17} /></a>
+          <span className="closing-note">أمان — وضوح يحفظ الودّ</span>
         </div>
       </section>
 
@@ -255,8 +255,8 @@ function Home() {
         <div className="footer-inner section-shell">
           <BrandMark light />
           <span className="footer-motto">وضوح يحفظ الودّ</span>
-          <div className="footer-links"><a href="#why">لماذا وثاق؟</a><a href="#how">كيف يعمل</a><a href="#faq">الأسئلة الشائعة</a></div>
-          <span className="copyright">© وثاق ٢٠٢٥</span>
+          <div className="footer-links"><a href="#why">لماذا أمان؟</a><a href="#how">كيف يعمل</a><a href="#faq">الأسئلة الشائعة</a></div>
+          <span className="copyright">© أمان ٢٠٢٥</span>
         </div>
       </footer>
     </main>
