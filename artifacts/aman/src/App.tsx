@@ -1,174 +1,320 @@
 import { useState } from 'react';
-import { ArrowLeft, Check, CircleHelp, Eye, FileText, MessageCircle, ShieldCheck } from 'lucide-react';
+import {
+  ArrowDownLeft,
+  ArrowLeft,
+  ArrowUpLeft,
+  Check,
+  ChevronDown,
+  CircleCheck,
+  Eye,
+  FileCheck2,
+  FileText,
+  Handshake,
+  Layers3,
+  Menu,
+  ShieldCheck,
+  Sparkles,
+  X,
+} from 'lucide-react';
 import { SupabaseConnectionTest } from '@/components/supabase-connection-test';
 
 const questions = [
   {
-    q: 'ما هي أمان؟',
-    a: 'أمان منصة لتنظيم الاتفاقات المالية بين العميل ومقدم الخدمة المستقل. تساعدكما على توضيح قيمة المشروع ومراحله ومتابعة حالة كل دفعة ضمن تجربة واحدة.',
+    question: 'ما هي أمان؟',
+    answer: 'أمان مساحة لتنظيم الاتفاقات المالية بين العميل ومقدم الخدمة المستقل. تساعدكما على توضيح قيمة المشروع ومراحله ومتابعة حالة كل خطوة ضمن تجربة واحدة.',
   },
   {
-    q: 'كيف تعمل الدفعات على مراحل؟',
-    a: 'يُقسّم الطرفان قيمة المشروع إلى مراحل واضحة قبل البدء. ترتبط كل مرحلة بعمل متفق عليه، وتظهر حالتها للطرفين عند الإرسال والمراجعة والاعتماد.',
+    question: 'هل أمان بنك أو خدمة ضمان للأموال؟',
+    answer: 'لا. أمان ليست بنكاً ولا خدمة ضمان أو escrow، ولا تضمن الأموال أو تضمن نتيجة المشروع. دورها تنظيم الاتفاق وإظهار تفاصيله وحالات مراحله بوضوح.',
   },
   {
-    q: 'متى يراجع العميل العمل؟',
-    a: 'عند إكمال مقدم الخدمة للمرحلة، يستطيع العميل مراجعة العمل وإبداء موافقته. وتظل تفاصيل المرحلة وحالتها ظاهرة للطرفين.',
+    question: 'كيف تعمل المراحل؟',
+    answer: 'يتفق الطرفان على قيمة المشروع وما يشمله، ثم يجزّئان العمل إلى مراحل وتسليمات محددة. تظهر قيمة كل مرحلة وحالتها للطرفين قبل الانتقال إلى الخطوة التالية.',
   },
   {
-    q: 'ماذا لو اختلف الطرفان؟',
-    a: 'يمكن لأي من الطرفين رفع نزاع حول المشروع لبدء مسار مراجعة. أمان لا تعد بحسم مسبق أو بضمان الأموال؛ تفاصيل هذا المسار تُعرض بوضوح ضمن المنصة.',
+    question: 'متى يراجع العميل العمل؟',
+    answer: 'عند إكمال مقدم الخدمة للمرحلة وإرسالها للمراجعة، يستطيع العميل الاطلاع على العمل وإبداء موافقته. وتظل تفاصيل المرحلة وحالتها ظاهرة للطرفين.',
   },
   {
-    q: 'هل أمان بنك أو خدمة ضمان للأموال؟',
-    a: 'لا. أمان ليست بنكاً، ولا نعرضها كخدمة تأمين أو ضمان للأموال. هي مساحة لتنظيم الاتفاقات ومتابعة المراحل وحالاتها بوضوح.',
+    question: 'ماذا لو اختلف الطرفان؟',
+    answer: 'يمكن لأي من الطرفين رفع نزاع حول المشروع لبدء مسار مراجعة. لا تعد أمان بحسم مسبق أو بنتيجة معينة؛ وتُعرض تفاصيل المسار بوضوح ضمن المنصة.',
+  },
+  {
+    question: 'هل الاتفاق يحل محل العقد أو الاستشارة القانونية؟',
+    answer: 'لا. أمان أداة تنظيمية تساعد على توثيق ما اتفق عليه الطرفان، ولا تحل محل العقد القانوني أو الاستشارة المتخصصة.',
+  },
+  {
+    question: 'هل تصلح أمان للمشاريع الصغيرة؟',
+    answer: 'نعم. وضوح البداية مفيد للمشاريع الصغيرة والكبيرة، من تصميم هوية أو كتابة محتوى إلى تطوير موقع أو تقديم خدمة مستقلة أخرى.',
   },
 ];
 
 function Brand() {
-  return <a className="brand" href="#top" aria-label="أمان، إلى أعلى الصفحة"><span className="brand-mark"><span>أ</span></span><span>أمان</span></a>;
+  return (
+    <a className="brand" href="#top" aria-label="أمان، إلى أعلى الصفحة" data-testid="link-home">
+      <span className="brand-mark" aria-hidden="true"><span>أ</span></span>
+      <span className="brand-name">
+        <span className="brand-ar">أمان</span>
+        <span className="brand-en" lang="en" dir="ltr">AMAN</span>
+      </span>
+    </a>
+  );
+}
+
+function AgreementPreview() {
+  return (
+    <div className="hero-art" aria-label="تصور توضيحي لاتفاق مشروع ومراحله" data-testid="visual-agreement">
+      <div className="art-halo" />
+      <div className="art-orbit" aria-hidden="true"><span /><span /><span /><span /></div>
+      <article className="agreement-card">
+        <div className="doc-topline">
+          <span className="doc-mark"><FileText size={15} strokeWidth={1.7} /> اتفاق مشروع</span>
+          <span className="doc-id">أ م / ٠٢٤</span>
+        </div>
+        <div className="doc-rule" />
+        <p className="doc-caption">ملخص اتفاق بين الطرفين</p>
+        <h3>تصميم هوية<br />متجر سِدرة</h3>
+        <div className="doc-parties">
+          <div><small>مقدم الخدمة</small><b>نورة العتيبي</b></div>
+          <div className="party-divider"><Handshake size={17} /></div>
+          <div><small>صاحب المشروع</small><b>متجر سِدرة</b></div>
+        </div>
+        <div className="doc-rule" />
+        <div className="milestone-title"><span>المراحل المتفق عليها</span><span className="milestone-count">٣ مراحل</span></div>
+        <div className="milestone-row">
+          <span className="milestone-number">١</span>
+          <span className="milestone-name">اتجاهات الهوية</span>
+          <span className="milestone-price">١٬٢٠٠ <small>ر.س</small></span>
+        </div>
+        <div className="milestone-row active-milestone">
+          <span className="milestone-number">٢</span>
+          <span className="milestone-name">تطوير الهوية</span>
+          <span className="milestone-price">٢٬٤٠٠ <small>ر.س</small></span>
+        </div>
+        <div className="milestone-row">
+          <span className="milestone-number">٣</span>
+          <span className="milestone-name">ملفات التسليم</span>
+          <span className="milestone-price">١٬٢٠٠ <small>ر.س</small></span>
+        </div>
+        <div className="doc-footer">
+          <span><Eye size={13} /> الحالة والتفاصيل للطرفين</span>
+          <span className="doc-signature">نورة × سِدرة</span>
+        </div>
+      </article>
+      <div className="floating-note note-one">
+        <span className="note-check"><Check size={12} /></span>
+        <span><b>مراحل واضحة</b><small>قبل أن يبدأ العمل</small></span>
+      </div>
+      <div className="floating-note note-two">
+        <span className="note-icon"><FileCheck2 size={16} /></span>
+        <span><b>ملخص مشترك</b><small>مرجع واحد للطرفين</small></span>
+      </div>
+      <div className="round-seal" aria-hidden="true"><span>أ</span><small>وضوح<br />من البداية</small></div>
+    </div>
+  );
 }
 
 function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const closeMenu = () => setMenuOpen(false);
+
   return (
-    <div className="page-shell" dir="rtl" lang="ar">
+    <div className="page-shell" dir="rtl" lang="ar" id="top">
       <header className="site-header">
         <div className="wrap nav-inner">
           <Brand />
-          <nav className="nav-links" aria-label="التنقل الرئيسي">
-            <a href="#how">كيف تعمل</a>
-            <a href="#clarity">وضوح الاتفاق</a>
-            <a href="#protection">للطرفين</a>
-            <a href="#faq">أسئلة شائعة</a>
+          <nav id="primary-navigation" className={`nav-links ${menuOpen ? 'nav-open' : ''}`} aria-label="التنقل الرئيسي">
+            <a href="#why" onClick={closeMenu}>لماذا أمان؟</a>
+            <a href="#how" onClick={closeMenu}>كيف تعمل</a>
+            <a href="#for-whom" onClick={closeMenu}>للطرفين</a>
+            <a href="#faq" onClick={closeMenu}>أسئلة شائعة</a>
           </nav>
-          <a className="nav-cta" href="#how">اكتشف أمان <ArrowLeft size={15} /></a>
+          <a className="nav-cta" href="#how">ابدأ بوضوح <ArrowLeft size={15} /></a>
+          <button
+            className="mobile-menu"
+            type="button"
+            aria-label={menuOpen ? 'إغلاق القائمة' : 'فتح القائمة'}
+            aria-expanded={menuOpen}
+            aria-controls="primary-navigation"
+            onClick={() => setMenuOpen(!menuOpen)}
+            data-testid="button-mobile-menu"
+          >
+            {menuOpen ? <X size={21} /> : <Menu size={21} />}
+          </button>
         </div>
       </header>
 
       <main>
-        <section className="hero wrap" id="top">
-          <div className="hero-copy">
-            <div className="eyebrow">اتفاق أوضح. مشروع أهدأ.</div>
-            <h1>لما تكون التفاصيل واضحة، <em>الشغل يمشي</em> بثقة.</h1>
-            <p>أمان تجمع العميل ومقدم الخدمة على اتفاق مالي واضح، ومراحل محددة، وحالة يعرفها الطرفان — من أول خطوة إلى اعتماد العمل.</p>
-            <div className="hero-actions">
-              <a className="button-primary" href="#how">تعرّف على طريقة العمل <ArrowLeft size={16} /></a>
-              <a className="button-secondary" href="#protection">كيف نحفظ الوضوح؟</a>
-            </div>
-            <div className="micro-trust"><span className="micro-icon"><ShieldCheck size={15} /></span><span>وضوح للطرفين، دون وعود مبالغ فيها</span></div>
-          </div>
-          <div className="hero-art" aria-label="تصور توضيحي لمشروع مقسّم إلى مراحل">
-            <div className="art-disc" />
-            <div className="art-ring" />
-            <div className="orbit-dot" />
-            <div className="mock-project">
-              <div className="mock-top"><span>ملخص المشروع</span><span className="mock-badge">نشط</span></div>
-              <h3>هوية بصرية لمقهى نُزل</h3>
-              <small>العميلة: ليان · مقدمة الخدمة: سارة</small>
-              <div className="mock-amount"><strong>٢٬٤٠٠ ر.س</strong><span>قيمة الاتفاق</span></div>
-              <div className="progress-track"><i /></div>
-              <div className="milestone-list">
-                <div className="milestone"><span className="milestone-dot"><Check size={13} /></span><div className="milestone-info"><strong>الاتجاه الإبداعي</strong><small>تم اعتماد العمل</small></div><span className="milestone-price">٨٠٠ ر.س</span></div>
-                <div className="milestone"><span className="milestone-dot wait">2</span><div className="milestone-info"><strong>تطبيقات الهوية</strong><small>بانتظار مراجعة العميلة</small></div><span className="milestone-price">١٬٠٠٠ ر.س</span></div>
-                <div className="milestone"><span className="milestone-dot wait">3</span><div className="milestone-info"><strong>ملفات التسليم</strong><small>لم تبدأ بعد</small></div><span className="milestone-price">٦٠٠ ر.س</span></div>
+        <section className="hero grain" aria-labelledby="hero-title">
+          <div className="wrap hero-grid">
+            <div className="hero-copy">
+              <div className="hero-kicker"><span className="kicker-line" /> اتفاق أوضح. بداية أهدأ.</div>
+              <h1 id="hero-title">الشغل الحلو<br />يبدأ <em>باتفاق واضح.</em></h1>
+              <p>أمان تجمع العميل ومقدم الخدمة على تفاصيل مشروع مفهومة، ومراحل محددة، وحالة يعرفها الطرفان — من أول خطوة إلى مراجعة العمل.</p>
+              <div className="hero-actions">
+                <a className="button-primary" href="#how" data-testid="button-hero-start">خلّ اتفاقك أوضح <ArrowLeft size={16} /></a>
+                <a className="text-link" href="#why" data-testid="link-explore">تعرّف على أمان <ArrowDownLeft size={16} /></a>
               </div>
+              <div className="hero-note"><ShieldCheck size={17} /><span>وضوح للطرفين، دون وعود مبالغ فيها</span></div>
             </div>
-            <div className="floating-note"><strong>كل مرحلة لها حالة</strong>واضحة للطرفين، في وقتها.</div>
+            <AgreementPreview />
+          </div>
+          <div className="wrap hero-bottomline">
+            <span>وضوح يحفظ الودّ</span><span className="bottomline-mark" /><span>من أول اتفاق إلى آخر تسليم</span>
           </div>
         </section>
 
-        <section className="section how" id="how">
-          <div className="wrap">
-            <div className="section-head">
-              <div className="section-kicker">بخطوات مفهومة</div>
-              <h2>من اتفاق أولي إلى عمل معتمد.</h2>
-              <p>بدل ما تضيع التفاصيل بين الرسائل، خلّوا الاتفاق والمراحل وحالة كل خطوة في مكان واحد.</p>
-            </div>
-            <div className="steps">
-              <article className="step"><div className="step-num">١</div><h3>اتفقوا على التفاصيل</h3><p>حددوا قيمة المشروع، وما الذي يشمله، وكيف ستُقسّمون العمل إلى مراحل مفهومة.</p></article>
-              <article className="step"><div className="step-num">٢</div><h3>تابعوا كل مرحلة</h3><p>يظهر للطرفين ما أُنجز وما ينتظر المراجعة، مع قيمة كل مرحلة وحالتها الحالية.</p></article>
-              <article className="step"><div className="step-num">٣</div><h3>راجعوا واعتمدوا</h3><p>يُرسل العمل للمراجعة، ويستطيع العميل اعتماده. وإذا ظهر خلاف، يوجد مسار لرفع نزاع.</p></article>
-            </div>
-          </div>
-        </section>
-
-        <section className="section" id="clarity">
-          <div className="wrap clarity">
-            <div className="clarity-visual" aria-hidden="true">
-              <div className="quote-card">
-                <div className="tiny">اتفاق المشروع · نسخة مشتركة</div>
-                <div className="quote-line"><span>الاتجاه الإبداعي</span><strong>٨٠٠ ر.س</strong></div>
-                <div className="quote-line"><span>تطبيقات الهوية</span><strong>١٬٠٠٠ ر.س</strong></div>
-                <div className="quote-line"><span>ملفات التسليم</span><strong>٦٠٠ ر.س</strong></div>
-                <div className="quote-line total"><span>إجمالي الاتفاق</span><strong>٢٬٤٠٠ ر.س</strong></div>
-              </div>
-            </div>
-            <div className="clarity-copy">
-              <div className="section-kicker">الكلام الواضح يريح الطرفين</div>
-              <h2>لا مفاجآت في منتصف الطريق.</h2>
-              <p>لما تكون قيمة المشروع وما يقابلها من عمل مكتوبة قبل البداية، يقدر كل طرف يعرف ما عليه وما له. أمان تساعد على جعل هذه التفاصيل مرئية وقابلة للمتابعة.</p>
-              <div className="benefit-list">
-                <div className="benefit"><span className="check"><Check size={13} /></span><span>نطاق عمل ومراحل متفق عليها قبل الانطلاق.</span></div>
-                <div className="benefit"><span className="check"><Eye size={13} /></span><span>حالة كل مرحلة ظاهرة للعميل ومقدم الخدمة.</span></div>
-                <div className="benefit"><span className="check"><FileText size={13} /></span><span>ملخص واحد يرجع له الطرفان وقت الحاجة.</span></div>
-              </div>
+        <section className="trust-strip" aria-label="مبادئ أمان">
+          <div className="wrap trust-inner">
+            <p>لأن الشراكة الطيبة تبدأ من تفاهم</p>
+            <div className="trust-items">
+              <span><ShieldCheck size={17} /> توقعات أوضح للطرفين</span>
+              <span><Layers3 size={17} /> مراحل متفق عليها</span>
+              <span><Handshake size={17} /> علاقة عمل أطيب</span>
             </div>
           </div>
         </section>
 
-        <section className="section protection" id="protection">
-          <div className="wrap">
-            <div className="section-head">
-              <div className="section-kicker">مساحة عادلة للطرفين</div>
-              <h2>الوضوح مو لطرف واحد.</h2>
-              <p>الاتفاق الجيد يوضح التوقعات، ويجعل التقدم مرئياً، ويترك مساحة للمراجعة إذا لم تسر الأمور كما خُطط لها.</p>
-            </div>
-            <div className="protection-grid">
-              <article className="protection-item"><span className="line-icon"><FileText size={18} /></span><h3>لصاحب المشروع</h3><p>تعرف ما الذي ستحصل عليه في كل مرحلة، وتراجع العمل قبل اعتماده. لا انتقال مبهم بين خطوة وأخرى.</p></article>
-              <article className="protection-item"><span className="line-icon"><Eye size={18} /></span><h3>لمقدم الخدمة</h3><p>تبدأ بنطاق ومقابل واضحين، وتوثّق تقدمك مرحلة بمرحلة، بدلاً من الاعتماد على تفاهمات متفرقة.</p></article>
-              <article className="protection-item"><span className="line-icon"><Check size={18} /></span><h3>حالات مفهومة</h3><p>من «قيد التنفيذ» إلى «بانتظار المراجعة» ثم «معتمد»؛ يرى كل طرف أين وصل المشروع.</p></article>
-              <article className="protection-item"><span className="line-icon"><MessageCircle size={18} /></span><h3>طريق عند الاختلاف</h3><p>إذا لم يتفق الطرفان على نتيجة مرحلة، يمكن رفع نزاع لمراجعة الموضوع عبر مسار مخصص.</p></article>
-            </div>
-            <div className="dispute-note"><strong>بكل شفافية:</strong> أمان تنظّم الاتفاق وتُظهر حالاته، لكنها لا تضمن الأموال أو نتائج النزاعات. تُعرض تفاصيل الخدمة ومسار المراجعة بوضوح قبل استخدامها.</div>
+        <section className="wrap why-section" id="why">
+          <div className="why-intro">
+            <span className="eyebrow">قبل أول تسليم</span>
+            <h2 className="section-heading">لا تترك التفاصيل<br /><em>للتخمين.</em></h2>
+            <p>كثير من سوء الفهم يبدأ بتفصيل صغير لم يُذكر. أمان تساعد على جمع صورة المشروع في مكان واحد، ليعرف كل طرف ما اتُّفق عليه.</p>
+            <a className="underlined-link" href="#how">خلّ البداية على بيّنة <ArrowLeft size={15} /></a>
+          </div>
+          <div className="clarity-list">
+            <article className="clarity-item">
+              <span className="clarity-index">٠١</span>
+              <div><h3>وش المطلوب بالضبط؟</h3><p>نطاق العمل والتسليمات مكتوبة بوضوح، عشان ما يتغير المشروع من غير اتفاق.</p></div>
+              <span className="clarity-symbol"><FileText size={19} /></span>
+            </article>
+            <article className="clarity-item">
+              <span className="clarity-index">٠٢</span>
+              <div><h3>متى ننتقل للخطوة الجاية؟</h3><p>كل مرحلة لها تسليمها وقيمتها، فتكون التوقعات واضحة من أول يوم.</p></div>
+              <span className="clarity-symbol"><Layers3 size={19} /></span>
+            </article>
+            <article className="clarity-item">
+              <span className="clarity-index">٠٣</span>
+              <div><h3>وش اللي اتفقنا عليه؟</h3><p>ملخص مشترك يرجع له الطرفان عند الحاجة، بدل ما تضيع التفاصيل بين الرسائل.</p></div>
+              <span className="clarity-symbol"><CircleCheck size={19} /></span>
+            </article>
           </div>
         </section>
 
-        <section className="section faq" id="faq">
-          <div className="wrap faq-layout">
-            <div className="section-head">
-              <div className="section-kicker">قبل أن تبدأ</div>
-              <h2>أسئلة على بالكم؟</h2>
-              <p>هذه أهم التفاصيل عن فكرة أمان وطريقة استخدامها.</p>
-              <div style={{ color: '#c27b61', marginTop: 22 }}><CircleHelp size={28} strokeWidth={1.4} /></div>
-            </div>
-            <div className="faq-list">
-              {questions.map((item, index) => (
-                <div className={`faq-item ${openFaq === index ? 'open' : ''}`} key={item.q}>
-                  <button type="button" aria-expanded={openFaq === index} onClick={() => setOpenFaq(openFaq === index ? null : index)} data-testid={`faq-toggle-${index}`}>
-                    <span>{item.q}</span><span aria-hidden="true">+</span>
-                  </button>
-                  <div className="faq-answer"><div><p>{item.a}</p></div></div>
-                </div>
-              ))}
-            </div>
+        <section className="quote-band">
+          <div className="wrap quote-inner">
+            <span className="quote-mark">«</span>
+            <p>الاتفاق الواضح ما يقيّد الشغل؛<br /><em>يعطيه مساحة يمشي بثقة.</em></p>
+            <span className="quote-caption">فكرة أمان، من أول صفحة</span>
+            <div className="quote-decoration" aria-hidden="true"><span>أ</span></div>
+          </div>
+        </section>
+
+        <section className="wrap how-section" id="how">
+          <div className="how-heading">
+            <div><span className="eyebrow">ببساطة، من البداية</span><h2 className="section-heading">ثلاث خطوات.<br /><em>واتفاق يطمن.</em></h2></div>
+            <p>ما يحتاج الموضوع تعقيد. اتفقوا على الأساسيات، وشوفوا الصورة كاملة قبل ما يبدأ الشغل.</p>
+          </div>
+          <div className="steps-track">
+            <article className="step-card">
+              <span className="step-count">١</span><span className="step-icon"><FileText size={21} /></span>
+              <h3>رتّبوا التفاصيل</h3><p>اكتبوا وصف المشروع والتسليمات والوقت المتوقع. الكلام الواضح اليوم يختصر أسئلة بكرة.</p>
+              <span className="step-foot">نطاق العمل <ArrowUpLeft size={14} /></span>
+            </article>
+            <span className="step-connector" aria-hidden="true" />
+            <article className="step-card">
+              <span className="step-count">٢</span><span className="step-icon"><Layers3 size={21} /></span>
+              <h3>قسّموا المراحل</h3><p>اربطوا كل مرحلة بتسليم محدد وقيمة متفق عليها، عشان تكون الالتزامات مفهومة للطرفين.</p>
+              <span className="step-foot">مراحل وقيمة <ArrowUpLeft size={14} /></span>
+            </article>
+            <span className="step-connector" aria-hidden="true" />
+            <article className="step-card">
+              <span className="step-count">٣</span><span className="step-icon"><Handshake size={21} /></span>
+              <h3>تابعوا واعتمدوا</h3><p>راجعوا ما أُنجز، وتابعوا الحالة خطوة بخطوة. وعند الاختلاف، يمكن رفع نزاع للمراجعة.</p>
+              <span className="step-foot">وضوح متبادل <ArrowUpLeft size={14} /></span>
+            </article>
+          </div>
+          <div className="how-cta">
+            <a className="button-primary" href="#faq" data-testid="button-how-faq">عندك سؤال؟ نجاوبك <ArrowLeft size={16} /></a>
+            <span>الوضوح يليق بكل مشروع، مهما كان حجمه.</span>
+          </div>
+        </section>
+
+        <section className="for-whom-section" id="for-whom">
+          <div className="wrap for-whom-inner">
+            <div className="for-whom-title"><span className="eyebrow">مساحة مشتركة</span><h2 className="section-heading">طرفين،<br /><em>وتوقعات أوضح.</em></h2></div>
+            <article className="side-card provider-card">
+              <span className="side-label">لمقدم الخدمة المستقل</span>
+              <h3>قدّر وقتك<br />وحدّد حدود شغلك.</h3>
+              <p>وضّح نطاق العمل، مراحل التسليم، وقيمة كل مرحلة قبل ما تبدأ.</p>
+              <span className="side-icon"><Sparkles size={20} /></span>
+              <span className="side-foot">مساحة لجهدك، من البداية</span>
+            </article>
+            <article className="side-card client-card">
+              <span className="side-label">للعميل وصاحب المشروع</span>
+              <h3>اعرف وش تستلم<br />ومتى تستلمه.</h3>
+              <p>صورة واضحة عن التكلفة والتسليمات تساعدك على بدء المشروع بتوقعات مفهومة.</p>
+              <span className="side-icon"><ShieldCheck size={20} /></span>
+              <span className="side-foot">وضوح في كل خطوة</span>
+            </article>
+          </div>
+        </section>
+
+        <section className="disclaimer-band" aria-label="تنويه مهم">
+          <div className="wrap disclaimer-inner">
+            <ShieldCheck size={19} />
+            <p><strong>بكل شفافية:</strong> أمان ليست بنكاً ولا خدمة ضمان أو escrow، ولا تحتفظ بالأموال أو تضمنها. تساعد على تنظيم الاتفاق ومتابعة المراحل، ولا تضمن نتيجة المشروع أو النزاع. راجعوا تفاصيل الخدمة ومسار المراجعة قبل الاستخدام.</p>
+          </div>
+        </section>
+
+        <section className="wrap faq-section" id="faq">
+          <div className="faq-aside">
+            <span className="eyebrow">أسئلة على بالكم</span>
+            <h2 className="section-heading">خلّنا نوضّح<br /><em>الصورة.</em></h2>
+            <p>الوضوح يبدأ من السؤال الصحيح. هذه إجابات عن فكرة أمان وطريقة استخدامها.</p>
+            <a className="text-link faq-contact" href="#how" data-testid="link-contact">راجع طريقة العمل <ArrowLeft size={16} /></a>
+          </div>
+          <div className="faq-list">
+            {questions.map((item, index) => (
+              <article className={`faq-item ${openFaq === index ? 'faq-open' : ''}`} key={item.question}>
+                <button
+                  className="faq-question"
+                  type="button"
+                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                  aria-expanded={openFaq === index}
+                  data-testid={`button-faq-${index}`}
+                >
+                  <span className="faq-number">٠{index + 1}</span><span>{item.question}</span><ChevronDown size={18} />
+                </button>
+                {openFaq === index && <p className="faq-answer" data-testid={`text-faq-answer-${index}`}>{item.answer}</p>}
+              </article>
+            ))}
           </div>
         </section>
 
         {import.meta.env.DEV && <SupabaseConnectionTest />}
 
-        <section className="final-cta" id="start">
+        <section className="final-cta grain" id="about">
           <div className="wrap cta-inner">
-            <div><h2>مشروعك الجاي يستاهل بداية أوضح.</h2><p>تعرّف على الفكرة، وخلي اتفاقكم أول خطوة مريحة.</p></div>
-            <a className="button-primary" href="#how">شاهد كيف تعمل أمان <ArrowLeft size={16} /></a>
+            <span className="closing-seal" aria-hidden="true"><span>أ</span></span>
+            <span className="closing-kicker">خلّ البداية تشبه اللي تتمنّاه</span>
+            <h2>اتفاق واضح.<br /><em>وقلب مرتاح.</em></h2>
+            <p>ابدأوا مشروعكم على تفاهم يحترم وقتكم وجهدكم، ويترك مساحة للشغل الحلو.</p>
+            <a className="button-primary" href="#top" data-testid="button-back-to-top">اكتشف أمان من البداية <ArrowLeft size={16} /></a>
+            <span className="closing-note">أمان — وضوح يحفظ الودّ</span>
           </div>
         </section>
       </main>
+
       <footer className="footer">
         <div className="wrap footer-inner">
           <Brand />
-          <p className="footer-note">اتفاق واضح، وعمل يمشي بهدوء.</p>
-          <nav className="footer-links" aria-label="روابط الصفحة"><a href="#how">كيف تعمل</a><a href="#protection">للطرفين</a><a href="#faq">الأسئلة الشائعة</a><a href="#top">العودة للأعلى</a></nav>
+          <p className="footer-note">وضوح يحفظ الودّ</p>
+          <nav className="footer-links" aria-label="روابط الصفحة">
+            <a href="#why">لماذا أمان؟</a><a href="#how">كيف تعمل</a><a href="#for-whom">للطرفين</a><a href="#faq">الأسئلة الشائعة</a>
+          </nav>
+          <span className="copyright">© أمان ٢٠٢٥</span>
         </div>
       </footer>
     </div>
