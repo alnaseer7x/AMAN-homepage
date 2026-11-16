@@ -1,0 +1,1 @@
+- [AMAN product identity](aman-product-identity.md) — WETHAQ was an accidental name; the user intends the existing AMAN product.
