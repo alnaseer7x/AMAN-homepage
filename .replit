@@ -18,3 +18,10 @@ expertMode = true
 [postMerge]
 path = "scripts/post-merge.sh"
 timeoutMs = 20000
+
+[userenv]
+
+[userenv.shared]
+
+[userenv.production]
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_7ukMUR6SO-DD3SvI8CwUBw_CokTgGwd"
