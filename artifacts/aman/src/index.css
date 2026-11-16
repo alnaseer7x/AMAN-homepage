@@ -149,12 +149,21 @@ h1, h2, h3, p { margin-top: 0; }
 .party-divider { color: #bd8060; padding: 7px; background: #f5eee4; border-radius: 50%; }
 .milestone-title { font-size: 9px; font-weight: 600; margin-bottom: 5px; }
 .milestone-count { color: #92988e; font-size: 8px; }
-.milestone-row { font-size: 9px; padding: 8px 5px; border-bottom: 1px solid #f0ece3; }
+.milestone-row { width: 100%; font-family: inherit; text-align: right; color: inherit; background: transparent; cursor: pointer; font-size: 9px; padding: 7px 5px; border: 0; border-bottom: 1px solid #f0ece3; transition: background .2s ease, color .2s ease; }
+.milestone-row:hover, .milestone-row.active-milestone { background: #f4f0e6; color: #214c42; }
+.milestone-row:focus-visible { outline: 2px solid #28564d; outline-offset: 1px; border-radius: 3px; }
 .milestone-number { display: grid; place-items: center; width: 18px; height: 18px; color: #648276; background: #edf0e6; border-radius: 50%; font-size: 8px; }
 .milestone-name { flex: 1; margin-right: 8px; }.milestone-price { font-weight: 600; direction: ltr; font-family: 'DM Sans', sans-serif; }
 .milestone-price small { color: #8e978d; font-weight: 400; }
+.demo-stage-detail { padding: 8px 6px 2px; border-bottom: 1px solid #f0ece3; }
+.demo-stage-status { display: flex; align-items: center; justify-content: space-between; color: #858d83; font-size: 8px; }
+.demo-status-pill { padding: 3px 7px; border-radius: 999px; font-size: 7px; font-weight: 600; }
+.demo-status-pill.is-released { color: #416d58; background: #e8efe7; }
+.demo-status-pill.is-pending { color: #986849; background: #f4ede2; }
+.demo-stage-detail p { margin: 5px 0 0; color: #858d83; font-size: 8px; line-height: 1.6; }
 .doc-footer { border-top: 1px solid #e7e1d5; margin-top: 11px; padding-top: 10px; font-size: 8px; color: #678174; }
 .doc-footer span:first-child { display: flex; align-items: center; gap: 4px; }.doc-signature { font-family: var(--app-font-serif); color: #a36e52; font-size: 10px; }
+.demo-disclaimer { margin: 7px 0 0; color: #9a8b79; text-align: center; font-size: 7px; }
 .floating-note { position: absolute; background: #fffdf7; border: 1px solid #e7e1d5; box-shadow: 0 10px 28px rgba(40,65,57,.1); padding: 11px 14px; display: flex; gap: 10px; align-items: center; z-index: 3; }
 .floating-note b, .floating-note small { display: block; }.floating-note b { font-size: 10px; color: #36554b; font-weight: 600; }.floating-note small { font-size: 8px; color: #92988e; margin-top: 3px; }
 .note-check, .note-icon { display: grid; place-items: center; width: 28px; height: 28px; background: #e9eee4; color: #4e7665; border-radius: 50%; }.note-two .note-icon { background: #f4e9dc; color: #a6684c; }

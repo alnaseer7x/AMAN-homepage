@@ -62,6 +62,35 @@ function Brand() {
 }
 
 function AgreementPreview() {
+  const [activeMilestoneId, setActiveMilestoneId] = useState(2);
+  const milestones = [
+    {
+      id: 1,
+      number: '١',
+      name: 'اتجاهات الهوية',
+      price: '١٬٢٠٠',
+      status: 'تم التحرير',
+      summary: 'اعتمد العميل التسليم في هذا المثال.',
+    },
+    {
+      id: 2,
+      number: '٢',
+      name: 'تطوير الهوية',
+      price: '٢٬٤٠٠',
+      status: 'قيد الانتظار',
+      summary: 'المرحلة بانتظار مراجعة التسليم.',
+    },
+    {
+      id: 3,
+      number: '٣',
+      name: 'ملفات التسليم',
+      price: '١٬٢٠٠',
+      status: 'قيد الانتظار',
+      summary: 'تبدأ بعد اكتمال المرحلة السابقة.',
+    },
+  ];
+  const activeMilestone = milestones.find(({ id }) => id === activeMilestoneId) ?? milestones[1];
+
   return (
     <div className="hero-art" aria-label="تصور توضيحي لاتفاق مشروع ومراحله" data-testid="visual-agreement">
       <div className="art-halo" />
@@ -72,7 +101,7 @@ function AgreementPreview() {
           <span className="doc-id">أ م / ٠٢٤</span>
         </div>
         <div className="doc-rule" />
-        <p className="doc-caption">ملخص اتفاق بين الطرفين</p>
+        <p className="doc-caption">مثال توضيحي — اختر مرحلة</p>
         <h3>تصميم هوية<br />متجر سِدرة</h3>
         <div className="doc-parties">
           <div><small>مقدم الخدمة</small><b>نورة العتيبي</b></div>
@@ -81,25 +110,37 @@ function AgreementPreview() {
         </div>
         <div className="doc-rule" />
         <div className="milestone-title"><span>المراحل المتفق عليها</span><span className="milestone-count">٣ مراحل</span></div>
-        <div className="milestone-row">
-          <span className="milestone-number">١</span>
-          <span className="milestone-name">اتجاهات الهوية</span>
-          <span className="milestone-price">١٬٢٠٠ <small>ر.س</small></span>
+        <div className="milestone-list" role="group" aria-label="اختر مرحلة لعرض حالتها">
+          {milestones.map((milestone) => (
+            <button
+              key={milestone.id}
+              className={`milestone-row${activeMilestoneId === milestone.id ? ' active-milestone' : ''}`}
+              type="button"
+              aria-pressed={activeMilestoneId === milestone.id}
+              aria-label={`عرض المرحلة ${milestone.number}: ${milestone.name}، ${milestone.price} ريال`}
+              onClick={() => setActiveMilestoneId(milestone.id)}
+              data-testid={`button-demo-stage-${milestone.id}`}
+            >
+              <span className="milestone-number">{milestone.number}</span>
+              <span className="milestone-name">{milestone.name}</span>
+              <span className="milestone-price">{milestone.price} <small>ر.س</small></span>
+            </button>
+          ))}
         </div>
-        <div className="milestone-row active-milestone">
-          <span className="milestone-number">٢</span>
-          <span className="milestone-name">تطوير الهوية</span>
-          <span className="milestone-price">٢٬٤٠٠ <small>ر.س</small></span>
-        </div>
-        <div className="milestone-row">
-          <span className="milestone-number">٣</span>
-          <span className="milestone-name">ملفات التسليم</span>
-          <span className="milestone-price">١٬٢٠٠ <small>ر.س</small></span>
+        <div className="demo-stage-detail" aria-live="polite" data-testid={`status-demo-stage-${activeMilestone.id}`}>
+          <div className="demo-stage-status">
+            <span>حالة توضيحية</span>
+            <span className={`demo-status-pill${activeMilestone.status === 'تم التحرير' ? ' is-released' : ' is-pending'}`}>
+              {activeMilestone.status}
+            </span>
+          </div>
+          <p>{activeMilestone.summary}</p>
         </div>
         <div className="doc-footer">
           <span><Eye size={13} /> الحالة والتفاصيل للطرفين</span>
-          <span className="doc-signature">نورة × سِدرة</span>
+          <span className="doc-signature">عرض تجريبي</span>
         </div>
+        <p className="demo-disclaimer" data-testid="text-demo-disclaimer">لا ينقل أو يحتجز أموالًا.</p>
       </article>
       <div className="floating-note note-one">
         <span className="note-check"><Check size={12} /></span>
